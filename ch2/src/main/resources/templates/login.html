@@ -5,7 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<h1 th:text="${param.msg}"></h1>
+<h1 th:text="${param.msg}"></h1>    <!--쿼리스트링에서 읽어옴-->
+<h1 th:text="${msg}"></h1>          <!--세션에서 읽어옴-->
+<!--<h1 th:text="${#request.getAttribute('msg')}"></h1>          &lt;!&ndash;세션에서 읽어옴&ndash;&gt;-->
 <form action="/login/login" method="post">
   <input type="text" name="id" placeholder="아이디를 입력하시오"><br>
   <input type="password" name="pwd" placeholder="비밀번호를 입력하시오"><br>
