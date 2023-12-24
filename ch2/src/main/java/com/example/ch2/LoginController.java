@@ -42,6 +42,6 @@ public class LoginController {
     }
 
     private boolean loginCheck(String id, String pwd) {
-        return id.equals("test") && pwd.equals("1234");
+        return id.equals("asdf") && pwd.equals("1234");
     }
 }
