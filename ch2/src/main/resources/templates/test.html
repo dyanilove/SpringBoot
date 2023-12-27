@@ -11,6 +11,9 @@
     </style>
 </head>
 <body>
+<h1 th:text="|year : ${year}|"></h1>
+<h1 th:text="|id : ${session.id}|"></h1>
+<h1 th:text="|email : ${application.email}|"></h1>
 <script th:inline="javascript">
     var firstName = [[${firstName}]]
     var lastName = /*[[${lastName}]]*/ "testName"

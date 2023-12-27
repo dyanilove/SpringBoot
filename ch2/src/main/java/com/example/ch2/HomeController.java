@@ -1,5 +1,8 @@
 package com.example.ch2;
 
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +20,15 @@ public class HomeController {  // 원격 프로그램
     }
 
     @GetMapping("/test")
-    public String test(Model model) {
+    public String test(Model model, HttpServletRequest request) {
+        request.setAttribute("year", 2023); // request객체에 저장
+
+        HttpSession session = request.getSession(); // 요청으로 부터 session객체를 얻어온다.
+        session.setAttribute("id", "asdf"); // session객체에 id를 저장
+
+        ServletContext application = session.getServletContext();
+        application.setAttribute("email", "service@fastcampus.com");
+
         model.addAttribute("lastName","daeun");
         model.addAttribute("firstName","Hwang");
         model.addAttribute("list", Arrays.asList("aaa","bbb","ccc","ddd","eee"));
