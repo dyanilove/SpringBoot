@@ -33,6 +33,9 @@ public class ReflectionTest {
             System.out.println("mv = " + mv);
             String methodName = "set" + StringUtils.capitalize(mv.getName()); // "set" + "Engine" = "setEngine"
             System.out.println("methodName = " + methodName);
+            method = carClass.getMethod(methodName, mv.getType());  // carClass.getMethod("setEngine", Engine.class);
+            method.invoke(car, mv.getType().newInstance()); // car.setEngine(new Engine()); car.setDoor(new Door());
         }
+        System.out.println("car = " + car);
     }
 }
