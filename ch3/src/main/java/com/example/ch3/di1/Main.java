@@ -1,12 +1,16 @@
 package com.example.ch3.di1;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
 class Car{
+    @Autowired
     Engine engine;
+    @Autowired
     Door door;
 
     @Override

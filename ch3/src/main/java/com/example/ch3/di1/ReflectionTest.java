@@ -1,7 +1,9 @@
 package com.example.ch3.di1;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -35,6 +37,33 @@ public class ReflectionTest {
             System.out.println("methodName = " + methodName);
             method = carClass.getMethod(methodName, mv.getType());  // carClass.getMethod("setEngine", Engine.class);
             method.invoke(car, mv.getType().newInstance()); // car.setEngine(new Engine()); car.setDoor(new Door());
+        }
+        System.out.println("car = " + car);
+
+        // 4. mv에 @Autowired붙었는지 확인하기
+        for(Field mv : mvArr){
+            Annotation[] annoArr = mv.getDeclaredAnnotations();
+            for(Annotation anno : annoArr){
+                System.out.println("mv.getName() = " + mv.getName());
+                System.out.println("anno.annotationType().getSimpleName() = " + anno.annotationType().getSimpleName());
+                System.out.println(anno.annotationType() == Autowired.class);
+            }
+        }
+
+        // 5. @Autowired붙은 mv에 setter호출하기
+        car = new Car();
+
+        for(Field mv : mvArr){
+            Annotation[] annoArr = mv.getDeclaredAnnotations();
+            for(Annotation anno : annoArr){
+                System.out.println("mv.getName() = " + mv.getName());
+                if(anno.annotationType() == Autowired.class){
+                    // setter 호출
+                    String methodName = "set" + StringUtils.capitalize(mv.getName()); // "setEngine"
+                    method = carClass.getMethod(methodName, mv.getType());
+                    method.invoke(car, mv.getType().newInstance()); // car.setEngine(new Engine());
+                }
+            }
         }
         System.out.println("car = " + car);
     }
