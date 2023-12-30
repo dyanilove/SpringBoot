@@ -6,6 +6,32 @@ import java.io.IOException;
 import java.util.Properties;
 
 class Car{
+    Engine engine;
+    Door door;
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "engine=" + engine +
+                ", door=" + door +
+                '}';
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+
+    public Door getDoor() {
+        return door;
+    }
+
+    public void setDoor(Door door) {
+        this.door = door;
+    }
 }
 class Engine{}
 class Door{}
