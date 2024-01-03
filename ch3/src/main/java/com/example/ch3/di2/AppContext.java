@@ -1,8 +1,11 @@
 package com.example.ch3.di2;
 
+import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -37,6 +40,36 @@ public class AppContext {
                     } catch (InvocationTargetException e) {
                         throw new RuntimeException(e);
                     }
+            }
+        }
+        doAutowired();  // @Autowired를 찾아서 빈(객체)간의 자동 연결 처리 byType
+        doResource();   // @Resource를 찾아서 빈(객체)간의 자동 연결 처리  byName
+    }
+
+    private void doResource() {
+        for(Object bean : map.values()) {
+            for(Field fld : bean.getClass().getDeclaredFields()){
+                if(fld.getAnnotation(Resource.class)!=null){
+                    try {
+                        fld.set(bean, getBean(fld.getName()));
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
+    }
+
+    private void doAutowired() {
+        for(Object bean : map.values()) {
+            for(Field fld : bean.getClass().getDeclaredFields()){
+                if(fld.getAnnotation(Autowired.class)!=null){
+                    try {
+                        fld.set(bean, getBean(fld.getType()));
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         }
     }
