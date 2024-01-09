@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Ch4Application implements CommandLineRunner {
+
 	@Autowired
 	EntityManagerFactory emf;
 
@@ -22,4 +23,5 @@ public class Ch4Application implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("emf = " + emf);
 	}
+
 }
