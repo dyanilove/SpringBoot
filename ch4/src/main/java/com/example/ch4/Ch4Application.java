@@ -39,10 +39,24 @@ public class Ch4Application implements CommandLineRunner {
 		user.setUpDate(new Date());
 
 		tx.begin();	// 트랜잭션 시작
+
+		// 1. 저장
 		em.persist(user); // user엔티티를 em에 영속화(저장), 같은 user엔티티를 여러번 저장해도 한번만 insert
 
+		// 2. 변경
 		user.setPassword("4321");	// PersistenceContext가 변경감지. update
 
+		tx.commit();	//트랜잭션 종료(DB에 반영)
+
+		// 3. 조회
+		User user2 = em.find(User.class, "aaa");	// em에 있으면 DB조회 안함
+		System.out.println("user == user2 = "+(user == user2));
+		User user3 = em.find(User.class, "bbb");	// em에 없으면 dB조회
+		System.out.println("user3 = "+user3);	// null, DB에 없음.
+
+		// 4. 삭제
+		tx.begin();	// 트랜잭션 시작
+		em.remove(user);
 		tx.commit();	//트랜잭션 종료(DB에 반영)
 	}
 
