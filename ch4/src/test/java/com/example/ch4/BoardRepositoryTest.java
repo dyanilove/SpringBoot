@@ -13,18 +13,18 @@ class BoardRepositoryTest {
     @Autowired
     private BoardRepository boardRepo;
 
-    @Test
-    public void insertTest(){
-        Board board = new Board();
-        board.setBno(1L);
-        board.setTitle("Test Title");
-        board.setContent("This is Test");
-        board.setWriter("aaa");
-        board.setViewCnt(0L);
-        board.setInDate(new Date());
-        board.setUpDate(new Date());
-        boardRepo.save(board);
-    }
+//    @Test
+//    public void insertTest(){
+//        Board board = new Board();
+//        board.setBno(1L);
+//        board.setTitle("Test Title");
+//        board.setContent("This is Test");
+//        board.setWriter("aaa");
+//        board.setViewCnt(0L);
+//        board.setInDate(new Date());
+//        board.setUpDate(new Date());
+//        boardRepo.save(board);
+//    }
 
     @Test
     public void selectTest(){

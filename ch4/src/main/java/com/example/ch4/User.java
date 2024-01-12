@@ -1,5 +1,6 @@
 package com.example.ch4;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -10,6 +11,7 @@ import java.util.Date;
 public class User {
 
     @Id // PK로 지정
+    @Column(name = "user_id")
     private String id;
     private String password;
     private String name;

@@ -14,6 +14,11 @@ public class Board {
     private String content;
     private String writer;
     private Long viewCnt;
+
+    @ManyToOne
+    @JoinColumn(name="user_id",nullable = false)
+    private User user;
+
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date inDate;
     @Temporal(value = TemporalType.TIMESTAMP)
@@ -27,9 +32,18 @@ public class Board {
                 ", content='" + content + '\'' +
                 ", writer='" + writer + '\'' +
                 ", viewCnt=" + viewCnt +
+                ", user=" + user +
                 ", inDate=" + inDate +
                 ", upDate=" + upDate +
                 '}';
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getBno() {
@@ -56,13 +70,13 @@ public class Board {
         this.content = content;
     }
 
-    public String getWriter() {
-        return writer;
-    }
-
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
+//    public String getWriter() {
+//        return writer;
+//    }
+//
+//    public void setWriter(String writer) {
+//        this.writer = writer;
+//    }
 
     public Long getViewCnt() {
         return viewCnt;
